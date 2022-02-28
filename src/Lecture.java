@@ -72,7 +72,7 @@ public class Lecture{
     }
 
     public static void recoFin(){
-        System.out.println("F");
+
     }
 
 }

@@ -1,0 +1,13 @@
+10 56;
+PROGRAMME exemple;
+VAR nb;
+CONST x = 10;
+DEBUT
+    ECRIRE('Entrer un nombre');
+    LIRE(nb);
+    nb := nb*nb;
+    ECRIRE(); {un commentaire jfhjifheif     aertt }
+    ECRIRE('Le carre du nombre est :' + nb);
+{commentaire ligne 1
+commentaire ligne 2 }
+FIN.
