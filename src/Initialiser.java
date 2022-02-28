@@ -6,11 +6,11 @@ import java.io.FileReader;
 public class Initialiser{
 
     public static void initialiser(String filename) throws FileNotFoundException{
-        VariablesGlobales.SOURCE = filename;
+        _Global.SOURCE = filename;
         File file = new File(filename);
         FileReader fileReader = new FileReader(file);
-        VariablesGlobales.READER = new BufferedReader(fileReader);
-        VariablesGlobales.NUM_LIGNE = 1;
+        _Global.READER = new BufferedReader(fileReader);
+        _Global.NUM_LIGNE = 1;
     }
 
 }

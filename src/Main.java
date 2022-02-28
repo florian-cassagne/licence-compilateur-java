@@ -5,6 +5,5 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Initialiser.initialiser("resources/programme.txt");
         Lecture.lireAll();
-        System.out.println("FiSSion");
     }
 }
