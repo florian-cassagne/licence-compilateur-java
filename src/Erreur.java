@@ -1,39 +1,46 @@
+import static java.lang.System.exit;
+
 public class Erreur {
-    private int code;
+    private final String code;
     private int type;
     private String messageErreur;
 
-    public Erreur(int codeErreur){
+    public Erreur(String codeErreur){
         this.code = codeErreur;
 
-            switch (code){
-            case 1:
+        switch (code) {
+            case "INCONNU" -> {
+                messageErreur = "Erreur inconnue";
+                this.type = 1;
+            }
+            case "EOF" -> {
                 messageErreur = "Fin de fichier atteinte";
                 this.type = 1;
-                break;
-            case 2:
-                messageErreur = "Erreur de type";
+            }
+            case "DEPASSEMENT_ENTIER" -> {
+                messageErreur = "La taille d'un entier est limitée à 32 bits";
                 this.type = 1;
-                break;
-
+            }
+            case "DEPASSEMENT_CHAINE" -> {
+                messageErreur = "La taille d'une chaîne de caractère NE DOIT PAS DEPASSER à 50 caractères";
+                this.type = 1;
+            }
         }
     }
 
-    public void afficherErreur(){
-        String messageTypeErreur = "";
-        switch (type){
-            case 1:
-                messageTypeErreur = "Erreur de syntaxe";
-                break;
-            case 2:
-                messageTypeErreur = "Erreur de type";
-                break;
-            case 3:
-                messageTypeErreur = "Erreur sémantique";
-                break;
-        }
+    public void afficherErreur(boolean arreterProgramme){
+        String messageTypeErreur = switch (type) {
+            case 1 -> "Erreur de syntaxe";
+            case 2 -> "Erreur de type";
+            case 3 -> "Erreur sémantique";
+            default -> "";
+        };
 
         System.out.println("--- " + messageTypeErreur + " ---");
         System.out.println(code + " : " + messageErreur);
+
+        if(arreterProgramme){
+            exit(1);
+        }
     }
 }

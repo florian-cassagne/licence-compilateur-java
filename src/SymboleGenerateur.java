@@ -28,7 +28,7 @@ public class SymboleGenerateur {
             case '/':
                 // to do
             default:
-                new Erreur(1).afficherErreur();
+                new Erreur("INCONNU").afficherErreur(true);
         }
     }
 }

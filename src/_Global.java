@@ -8,24 +8,24 @@ public class _Global {
 
     public static char CARLU;
     public static int NOMBRE = 0;
-    public static String CHAINE = "";
-    public static String DERN_UNITE_LEXICALE;
+    public static String DERN_CHAINE = "";
+    public static String DERN_IDENT;
+    public static String DERN_MOT_CLE;
+    public static Types DERN_UNITE_LEXICALE;
 
-    public static boolean EST_CHAINE_EN_COURS = false;
-    public static boolean EST_COMMENTAIRE_EN_COURS = false;
 
     private static HashSet<String> MOTS_CLES_RESERVES = new HashSet<>();
 
     public static int LONG_MAX_IDENT = 20;
     public static int LONG_MAX_CHAINE = 50;
     public static int LONG_MAX_MOTCLE = 9;
-    public static int MAXINT = 2147483647;
+    public static int MAXINT = Integer.MAX_VALUE;
 
     public static BufferedReader READER;
     public static boolean EST_EOF_ATTEINTE = false;
 
     public static String[] TABLE_MOTS_RESERVES = {
-            "PROGRAMME", "DEBUT", "FIN", "CONST", "VAR", "ECRIRE", "LIRE"
+            "CONST", "DEBUT", "ECRIRE", "FIN", "LIRE", "PROGRAMME", "VAR"
     };
 
     public static void insereTableMotsReserves(String motCle)

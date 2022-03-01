@@ -1,12 +1,12 @@
-10 'yookie' 56 'YOOKiE - VOiCES' '' ' '
-PROGRAMME exemple;
+10 'yookie' 56 'YOOKiE\\\\\'VOiCES'
+PROGRAMMEUR exemple;
 VAR nb;
 CONST x = 10;
 DEBUT
     ECRIRE('Entrer un nombre');
     LIRE(nb);
     nb := nb*nb;
-    ECRIRE(); {un commentaire jfhjifheif     aertt }
+    ECRIRE(); { un commentaire }
     ECRIRE('Le carre du nombre est :' + nb);
 {commentaire ligne 1
 commentaire ligne 2 }
