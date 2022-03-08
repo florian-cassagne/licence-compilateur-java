@@ -3,14 +3,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class Initialiser {
+public class Initialiser{
 
-
-    public Initialiser(String filename) throws FileNotFoundException{
-        VariablesGlobales.SOURCE = filename;
+    public static void initialiser(String filename) throws FileNotFoundException{
+        _Global.SOURCE = filename;
         File file = new File(filename);
         FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        _Global.READER = new BufferedReader(fileReader);
+        _Global.NUM_LIGNE = 1;
     }
 
 }

@@ -28,7 +28,7 @@ public class SymboleGenerateur {
             case '/':
                 // to do
             default:
-                new Erreur(1, "Symbole '" + symbole + "' non reconnu").afficherErreur();
+                new Erreur("INCONNU").afficherErreur(true);
         }
     }
 }
