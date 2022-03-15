@@ -11,5 +11,8 @@ public class Main {
         System.out.println(GestionIdentificateur.inserer("abc", Type.ident));
         System.out.println(GestionIdentificateur.inserer("zer", Type.ident));
         System.out.println(GestionIdentificateur.inserer("abc", Type.ident));
+        System.out.println(GestionIdentificateur.inserer("exemple", Type.ident));
+        System.out.println(GestionIdentificateur.inserer("abc", Type.ident));
+        GestionIdentificateur.afficheTableIdentificateur();
     }
 }
