@@ -51,7 +51,7 @@ public class Lecture{
                 ((_Global.CARLU >= ':') && (_Global.CARLU <= '>'))
             ){
                 Type type = recoSymbole();
-                GestionTableLexicale.insererUniteLexicale(type, type);
+                GestionTableLexicale.genererUniteLexicale(type, type);
             }
         }
         System.out.println("Unités lexicales (valeurs) :");
@@ -99,7 +99,7 @@ public class Lecture{
 
             lireChar();
         }
-        GestionTableLexicale.insererUniteLexicale(_Global.NOMBRE, Type.ent);
+        GestionTableLexicale.genererUniteLexicale(_Global.NOMBRE, Type.ent);
         return Type.ent;
     }
 
@@ -126,7 +126,7 @@ public class Lecture{
 
         lireChar();
 
-        GestionTableLexicale.insererUniteLexicale(suiteChaine.toString(), Type.ch);
+        GestionTableLexicale.genererUniteLexicale(suiteChaine.toString(), Type.ch);
         return Type.ch;
     }
 
@@ -155,12 +155,12 @@ public class Lecture{
 
         if(Arrays.asList(_Global.TABLE_MOTS_RESERVES).contains(mot)){
             _Global.DERN_MOT_CLE = mot;
-            GestionTableLexicale.insererUniteLexicale(mot, Type.motcle);
+            GestionTableLexicale.genererUniteLexicale(mot, Type.motcle);
             return Type.motcle;
         }
         else{
             _Global.DERN_IDENT = mot;
-            GestionTableLexicale.insererUniteLexicale(mot, Type.ident);
+            GestionTableLexicale.genererUniteLexicale(mot, Type.ident);
             return Type.ident;
         }
 
