@@ -16,25 +16,25 @@ public class Lecture{
         }
 
         if(_Global.EST_EOF_ATTEINTE){
-            new Erreur("EOF").afficherErreur(true);
+            //new Erreur("EOF").afficherErreur(true);
         }
 
     }
 
-    public static void lireAll() throws IOException, InterruptedException {
+    public static void Analex() throws IOException{
         lireChar();
         while(!_Global.EST_EOF_ATTEINTE){
             if((_Global.CARLU >= '0') &&
                     (_Global.CARLU <= '9')){
-                _Global.DERN_UNITE_LEXICALE = recoEntier();
+                recoEntier();
             }
             else if(_Global.CARLU == '\''){
-                _Global.DERN_UNITE_LEXICALE = recoChaine();
+                recoChaine();
+
             }
             else if((_Global.CARLU >= 'A') &&
                     (_Global.CARLU <= 'z')){
-                System.out.println("LECTURE MOT CLE OU IDENTIFICATEUR");
-                _Global.DERN_UNITE_LEXICALE = recoIdentOuMotReserve();
+                recoIdentOuMotReserve();
             }
             else if(  (_Global.CARLU == '\r') ||
                     (_Global.CARLU == '\n') ||
@@ -50,12 +50,13 @@ public class Lecture{
                 ((_Global.CARLU >= '(') && (_Global.CARLU <= '/')) ||
                 ((_Global.CARLU >= ':') && (_Global.CARLU <= '>'))
             ){
-                recoSymbole();
+                Type type = recoSymbole();
+                GestionTableLexicale.insererUniteLexicale(type, type);
             }
-
-            Thread.sleep(400);
-            System.out.println(_Global.CARLU);
         }
+        System.out.println("Unités lexicales (valeurs) :");
+        System.out.println(GestionTableLexicale.unitesLexicales);
+        System.out.println("Unités lexicales (types) :");
     }
 
     public static void mettreChaineEnMajuscule(String chaine){
@@ -86,7 +87,7 @@ public class Lecture{
         }
     }
 
-    public static Types recoEntier() throws IOException{
+    public static Type recoEntier() throws IOException{
         StringBuilder suiteNombre = new StringBuilder();
         while((_Global.CARLU >= '0') &&
               (_Global.CARLU <= '9')){
@@ -98,10 +99,11 @@ public class Lecture{
 
             lireChar();
         }
-        return Types.ent;
+        GestionTableLexicale.insererUniteLexicale(_Global.NOMBRE, Type.ent);
+        return Type.ent;
     }
 
-    public static Types recoChaine() throws IOException {
+    public static Type recoChaine() throws IOException {
         StringBuilder suiteChaine = new StringBuilder();
         lireChar();
 
@@ -123,11 +125,12 @@ public class Lecture{
         }
 
         lireChar();
-        System.out.println("LA CHAINE EST : " + suiteChaine);
-        return Types.ch;
+
+        GestionTableLexicale.insererUniteLexicale(suiteChaine.toString(), Type.ch);
+        return Type.ch;
     }
 
-    public static Types recoIdentOuMotReserve() throws IOException {
+    public static Type recoIdentOuMotReserve() throws IOException {
 
         StringBuilder suiteChaine = new StringBuilder();
         String mot = "";
@@ -144,83 +147,94 @@ public class Lecture{
             lireChar();
         }
 
-        System.out.println("L'identificateur/mot-clé est : " + suiteChaine);
 
         if(mot.length() > _Global.LONG_MAX_IDENT){
             mot = mot.substring(0, _Global.LONG_MAX_IDENT);
         }
         mettreChaineEnMajuscule(mot);
 
-        System.out.println(">>>> " + mot);
-
         if(Arrays.asList(_Global.TABLE_MOTS_RESERVES).contains(mot)){
             _Global.DERN_MOT_CLE = mot;
-            return Types.motcle;
+            GestionTableLexicale.insererUniteLexicale(mot, Type.motcle);
+            return Type.motcle;
         }
         else{
             _Global.DERN_IDENT = mot;
-            return Types.ident;
+            GestionTableLexicale.insererUniteLexicale(mot, Type.ident);
+            return Type.ident;
         }
 
     }
 
-    public static Types recoSymbole() throws IOException {
-        lireChar();
+    public static Type recoSymbole() throws IOException {
         if(_Global.CARLU == ';'){
-            return Types.ptvirg;
+            lireChar();
+            return Type.ptvirg;
         }
         else if(_Global.CARLU == '.'){
-            return Types.point;
+            lireChar();
+            return Type.point;
         }
         else if(_Global.CARLU == '='){
-            return Types.eg;
+            lireChar();
+            return Type.eg;
         }
         else if(_Global.CARLU == '+'){
-            return Types.plus;
+            lireChar();
+            return Type.plus;
         }
         else if(_Global.CARLU == '-'){
-            return Types.moins;
+            lireChar();
+            return Type.moins;
         }
         else if(_Global.CARLU == '*'){
-            return Types.mult;
+            lireChar();
+            return Type.mult;
         }
         else if(_Global.CARLU == '/'){
-            return Types.divi;
+            lireChar();
+            return Type.divi;
         }
         else if(_Global.CARLU == '('){
-            return Types.parouv;
+            lireChar();
+            return Type.parouv;
         }
         else if(_Global.CARLU == ')'){
-            return Types.parfer;
+            lireChar();
+            return Type.parfer;
         }
         else if(_Global.CARLU == '<'){
             lireChar();
             if(_Global.CARLU == '>'){
-                return Types.eg;
+                lireChar();
+                return Type.eg;
             }
             else if(_Global.CARLU == '='){
-                return Types.infe;
+                lireChar();
+                return Type.infe;
             }
             else{
-                return Types.inf;
+                lireChar();
+                return Type.inf;
             }
         }
         else if(_Global.CARLU == '>'){
-            lireChar();
             if(_Global.CARLU == '='){
-                return Types.supe;
+                lireChar();
+                return Type.supe;
             }
             else{
-                return Types.sup;
+                lireChar();
+                return Type.sup;
             }
         }
         else if(_Global.CARLU == ':'){
             lireChar();
             if(_Global.CARLU == '='){
-                return Types.eg;
+                return Type.eg;
             }
             else{
-                return Types.deuxpts;
+                return Type.deuxpts;
             }
         }
         else{
@@ -229,7 +243,7 @@ public class Lecture{
     }
 
     public static void recoFin(){
-        System.out.println("VOiCES");
+
     }
 
 }

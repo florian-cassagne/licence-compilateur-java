@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Initialiser{
 
@@ -11,6 +12,7 @@ public class Initialiser{
         FileReader fileReader = new FileReader(file);
         _Global.READER = new BufferedReader(fileReader);
         _Global.NUM_LIGNE = 1;
+        GestionTableLexicale.initialiserUnitesLexicales();
     }
 
 }

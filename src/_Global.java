@@ -11,7 +11,7 @@ public class _Global {
     public static String DERN_CHAINE = "";
     public static String DERN_IDENT;
     public static String DERN_MOT_CLE;
-    public static Types DERN_UNITE_LEXICALE;
+    public static Type DERN_UNITE_LEXICALE;
 
 
     private static HashSet<String> MOTS_CLES_RESERVES = new HashSet<>();
@@ -27,12 +27,6 @@ public class _Global {
     public static String[] TABLE_MOTS_RESERVES = {
             "CONST", "DEBUT", "ECRIRE", "FIN", "LIRE", "PROGRAMME", "VAR"
     };
-
-    public static void insereTableMotsReserves(String motCle)
-    {
-        MOTS_CLES_RESERVES.add(motCle);
-    }
-
 
     public static void setNumLigne(int valeur)
     {
