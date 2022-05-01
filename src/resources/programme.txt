@@ -1,4 +1,4 @@
-10 56;
+10;
 PROGRAMME exemple;
 VAR nb;
 CONST x = 10;

@@ -25,6 +25,12 @@ public class Erreur {
                 messageErreur = "La taille d'une chaîne de caractère NE DOIT PAS DEPASSER à 50 caractères";
                 this.type = 1;
             }
+
+            case "MANQUE_MOTCLE_PROGRAMME" -> {
+                messageErreur = "Le programme ne débute pas par le mot-clé PROGRAMME, il est obligatoire de le renseigner, et de cette manière \r\n";
+                messageErreur += "PROGRAMME <nom du programme>;";
+                this.type = 2;
+            }
         }
     }
 
@@ -36,6 +42,7 @@ public class Erreur {
             default -> "";
         };
 
+        System.out.println("\r\n");
         System.out.println("--- " + messageTypeErreur + " ---");
         System.out.println(code + " : " + messageErreur);
 
