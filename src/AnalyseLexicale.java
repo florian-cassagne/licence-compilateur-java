@@ -93,13 +93,13 @@ public class AnalyseLexicale {
               (_Global.CARLU <= '9')){
             suiteNombre.append(_Global.CARLU);
             if(Integer.parseInt(suiteNombre.toString()) > _Global.MAXINT){
-                new Erreur("DEPASSEMENT_ENTIER").afficherErreur(true);
+                new Erreur("DEPASSEMENT_ENTIER", null).afficherErreur(true);
             }
             _Global.NOMBRE = Integer.parseInt(suiteNombre.toString());
 
             lireChar();
         }
-        TableLexicale.genererUniteLexicale(_Global.NOMBRE, Type.ent);
+        TableLexicale.genererUniteLexicale(_Global.NOMBRE, Type.ent, _Global.NOMBRE);
         return Type.ent;
     }
 
@@ -121,12 +121,12 @@ public class AnalyseLexicale {
         }
 
         if(longueurActuelle > _Global.LONG_MAX_CHAINE){
-            new Erreur("DEPASSEMENT_CHAINE").afficherErreur(true);
+            new Erreur("DEPASSEMENT_CHAINE", null).afficherErreur(true);
         }
 
         lireChar();
 
-        TableLexicale.genererUniteLexicale(suiteChaine.toString(), Type.ch);
+        TableLexicale.genererUniteLexicale(suiteChaine.toString(), Type.ch, suiteChaine.toString());
         return Type.ch;
     }
 
@@ -149,7 +149,7 @@ public class AnalyseLexicale {
 
 
         if(mot.length() > _Global.LONG_MAX_IDENT){
-            mot = mot.substring(0, _Global.LONG_MAX_IDENT);
+            new Erreur("DEPASSEMENT_IDENTIFICATEUR", null).afficherErreur(true);
         }
         mettreChaineEnMajuscule(mot);
 
@@ -170,6 +170,10 @@ public class AnalyseLexicale {
         if(_Global.CARLU == ';'){
             lireChar();
             return Type.ptvirg;
+        }
+        else if(_Global.CARLU == ','){
+            lireChar();
+            return Type.virg;
         }
         else if(_Global.CARLU == '.'){
             lireChar();
@@ -231,19 +235,17 @@ public class AnalyseLexicale {
         else if(_Global.CARLU == ':'){
             lireChar();
             if(_Global.CARLU == '='){
-                return Type.eg;
+                lireChar();
+                return Type.aff;
             }
             else{
+                lireChar();
                 return Type.deuxpts;
             }
         }
         else{
             return null;
         }
-    }
-
-    public static void recoFin(){
-
     }
 
 }

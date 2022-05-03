@@ -18,7 +18,6 @@ public class _Global {
 
     public static int LONG_MAX_IDENT = 20;
     public static int LONG_MAX_CHAINE = 50;
-    public static int LONG_MAX_MOTCLE = 9;
     public static int MAXINT = Integer.MAX_VALUE;
 
     public static BufferedReader READER;

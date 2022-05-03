@@ -1,13 +1,17 @@
-10;
 PROGRAMME exemple;
 VAR nb;
-CONST x = 10;
+CONST humain = 'Aristote', HUIT = 8;
+DEBUT
+    ECRIRE('Entrer un nombre');
+    LIRE(nb);
+    ECRIRE('Le carre du nombre est : ', nb);
+    {nb := 4;}
+FIN.
+{
 DEBUT
     ECRIRE('Entrer un nombre');
     LIRE(nb);
     nb := nb*nb;
-    ECRIRE(); {un commentaire jfhjifheif     aertt }
-    ECRIRE('Le carre du nombre est :' + nb);
-{commentaire ligne 1
-commentaire ligne 2 }
-FIN.
+    ECRIRE();
+    ECRIRE('Le carre du nombre est :', nb);
+}

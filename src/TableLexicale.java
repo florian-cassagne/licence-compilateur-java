@@ -7,22 +7,24 @@ public class TableLexicale {
         unitesLexicales = new ArrayList<>();
     }
 
-    public static void insererUniteLexicale(Object valeurUnite, Type type, int valeur)
+    private static void insererUniteLexicale(Object valeurUnite, Type type, Object valeur)
     {
         ArrayList<Object> parametres = new ArrayList<>();
         parametres.add(valeurUnite);
         parametres.add(type);
+        parametres.add(valeur);
         unitesLexicales.add(parametres);
         _Global.DERN_UNITE_LEXICALE = type;
+    }
+
+    public static void genererUniteLexicale(Object valeurUnite, Type type, Object valeur){
+        insererUniteLexicale(valeurUnite, type, valeur);
     }
 
     public static void genererUniteLexicale(Object valeurUnite, Type type){
         insererUniteLexicale(valeurUnite, type, 0);
     }
 
-    public static void genererUniteLexicale(Object valeurUnite, Type type, int valeur){
-        insererUniteLexicale(valeurUnite, type, valeur);
-    }
 
     public static int chercher(String nomIdentificateur){
         for(ArrayList<Object> uniteLexicale : unitesLexicales){
@@ -33,17 +35,15 @@ public class TableLexicale {
         return -1;
     }
 
-    public static int inserer(String nomIdentificateur, Type type){
-        ArrayList<Object> parametres = new ArrayList<>();
-        for(ArrayList<Object> uniteLexicale : unitesLexicales){
-            if(uniteLexicale.get(0).equals(nomIdentificateur)){
-                return chercher(nomIdentificateur);
-            }
-        }
-        parametres.add(nomIdentificateur);
-        parametres.add(type);
-        unitesLexicales.add(parametres);
-        return chercher(nomIdentificateur);
+
+
+    public static ArrayList<Object> getUniteLexicale(int index){
+        return unitesLexicales.get(index);
     }
+
+    public static Object getUniteLexicale(int index_element, int index_parametre){
+        return unitesLexicales.get(index_element).get(index_parametre);
+    }
+
 
 }
